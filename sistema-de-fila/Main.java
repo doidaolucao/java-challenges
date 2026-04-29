@@ -1,19 +1,20 @@
 import java.util.Scanner;
 
 public class Main {
-    static Scanner input = new Scanner(System.in);
-    static int topo = -1;
-    static String[] pilha = new String[5];
+    static Scanner input = new Scanner(System.in); // Scanner para inputs
+    static int topo = -1; // -1 para indicar pilha vazia
+    static String[] pilha = new String[5]; // Vetor para pilha
 
     public static void main(String[] args) {
-        int opcao = 0;
+        int opcao = 0; // Opção do usuário
 
         while (true) {
-            System.out.println("\n------------------------------\nBEM-VINDO AO SISTEMA DE PILHA\nInsira o que deseja fazer\n\n1 - Empilhar\n2 - Remover\n3 - Listar pilha\n0 - Sair\n");
+            System.out.println("\n------------------------------\nBEM-VINDO AO SISTEMA DE PILHA\nInsira o que deseja fazer\n\n1 - Empilhar\n2 - Remover\n3 - Listar pilha\n4 - Limpar pilha\n0 - Sair\n");
             opcao = input.nextInt();
 
-            input.nextLine();
+            input.nextLine(); // Limpar buffer
 
+            // *** ESTRUTURA DE DECISÃO MENU ***
             if (opcao == 1) {
                 Empilhar();
 
@@ -22,6 +23,9 @@ public class Main {
 
             } else if (opcao == 3) {
                 Listar();
+
+            } else if (opcao == 4) {
+                Limpar();
 
             } else if (opcao == 0) {
                 break;
@@ -34,12 +38,12 @@ public class Main {
     }   
 
     public static void Empilhar() {
-        if (topo < pilha.length - 1) {
+        if (topo < pilha.length - 1) { // LIMITE para a pilha de até 5, se passar, criar novo nome
             System.out.println("\nInsira um nome:");
-            String nome = input.nextLine();
+            String nome = input.nextLine(); // Armazena variável
 
-            topo++;
-            pilha[topo] = nome;
+            topo++; // Adiciona a pilha
+            pilha[topo] = nome; // O último da pilha recebe a variável
 
             System.out.println("\nEmpilhado com sucesso!");
 
@@ -50,14 +54,14 @@ public class Main {
     }
 
     public static void Remover() {
-        if (topo == -1) {
+        if (topo == -1) { // Verifica se está vazia
             System.out.println("\nNão há o que remover!");
 
         } else {
             System.out.println("\nRemovendo o último...");
         
-            pilha[topo] = null;
-            topo--;
+            pilha[topo] = null; // O último da pilha se torna null a variável
+            topo--; // Remove posição
 
             System.out.println("\nRemovido com sucesso!");
         }
@@ -70,7 +74,7 @@ public class Main {
         } else {
             System.out.print("Pilha: ");
 
-            for(int i = 0; i <= topo; i++) {
+            for(int i = 0; i <= topo; i++) { // Listagem básica de pilha
                 if (topo == 0) {
                     System.out.print(pilha[i]);
 
@@ -80,6 +84,17 @@ public class Main {
                 }
             };
 
+        }
+    }
+
+    public static void Limpar() {
+        if (topo == -1) {
+            System.out.println("A pilha está vazia!");
+
+        } else {
+            System.out.println("Pilha limpa!");
+
+            topo = -1; // Limpa a pilha transformando a última posição em -1
         }
     }
 }
